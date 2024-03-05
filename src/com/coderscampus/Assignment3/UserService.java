@@ -1,30 +1,40 @@
 package com.coderscampus.Assignment3;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
 public class UserService {
 	
 	
-	
-	BufferedReader fileReader = null;
-	
-	
-	public static User[] dataRead(String textFile) throws IOException {
-			User[] userArr = new User[4];
-			BufferedReader fileReader = new BufferedReader(new FileReader(textFile));
-			String line;
-			int i = 0;
+
+	public static User[] dataRead() {
+		User[] userArr = new User[4];
+		BufferedReader fileReader = null;
+		try {
+			fileReader = new BufferedReader(new FileReader("data.txt"));
+		} catch (FileNotFoundException e) {
+			System.out.println("File not found");
+			e.printStackTrace();
+		}
+		String line;
+		int i = 0;
+			try {
 				while ((line = fileReader.readLine()) != null) {
 					String[] userLine = line.split(",");
 					userArr[i] = new User(userLine[0], userLine[1], userLine[2]);
-					i++;
+					i++;	
 				}
-	
+			} catch (IOException e) {
+				System.out.println("I/O exception");
+				e.printStackTrace();
+			}
 			return userArr;
-				}
 			
+	}
+	
+	
+	
 	
 }
-

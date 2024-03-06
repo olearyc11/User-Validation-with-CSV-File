@@ -7,10 +7,15 @@ import java.io.IOException;
 
 public class UserService {
 	
-	
+		static User[] userArr = new User[4];
+		
+		public UserService() {
+			dataRead();
+		}
+		
 
-	public static User[] dataRead() {
-		User[] userArr = new User[4];
+	public static void dataRead() {
+		
 		BufferedReader fileReader = null;
 		try {
 			fileReader = new BufferedReader(new FileReader("data.txt"));
@@ -29,12 +34,30 @@ public class UserService {
 			} catch (IOException e) {
 				System.out.println("I/O exception");
 				e.printStackTrace();
-			}
-			return userArr;
-			
+			}	
 	}
 	
+	static User[] getUsers() {
+		return userArr;
+	}
 	
+	public static boolean validateInput(String usernameInput, String passwordInput) {
+		for (User user : userArr) {
+			if (user.getUsername().equalsIgnoreCase(usernameInput) && user.getPassword().equals(passwordInput)) {
+				return true;
+			}
+			}
+		return false;
+		}
+	
+	public static String getNamebyUsername(String usernameInput) {
+		for (User user: userArr) {
+			if (user.getUsername().equalsIgnoreCase(usernameInput)) {
+				return user.getName();
+			}
+		}
+		return null;
+	}
 	
 	
 }

@@ -13,19 +13,19 @@ public class UserLoginApplication {
 		int attempts = 5;
 	
 		while (attempts > 0) {
-			System.out.println("Please enter your Username:");
+			System.out.println("Enter your email:");
 			String usernameInput = scanner.nextLine();
-			System.out.println("Please enter your password:");
+			System.out.println("Enter your password:");
 			String passwordInput = scanner.nextLine();
 			
 			if (UserService.validateInput(usernameInput, passwordInput)) {
 				String name = UserService.getNamebyUsername(usernameInput);
-				System.out.println("Welcome " + name);
+				System.out.println("Welcome: " + name);
 				break;
 			} else { 
 				attempts--;
 				if (attempts == 0) {
-					System.out.println("Too many failed attempts, you are now locked out.");
+					System.out.println("Too many failed login attempts, you are now locked out.");
 					break;
 				}
 				System.out.println("Invalid login, please try again.");

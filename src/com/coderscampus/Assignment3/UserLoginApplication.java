@@ -21,17 +21,18 @@ public class UserLoginApplication {
 			if (UserService.validateInput(usernameInput, passwordInput)) {
 				String name = UserService.getNamebyUsername(usernameInput);
 				System.out.println("Welcome " + name);
-				
+				break;
 			} else { 
-				System.out.println("Invalid login, please try again.");
 				attempts--;
+				if (attempts == 0) {
+					System.out.println("Too many failed attempts, you are now locked out.");
+					break;
+				}
+				System.out.println("Invalid login, please try again.");
 				continue;
 			}
-				if (attempts == 0) {
-					System.out.println("Too many failed login attempts, you are now locked out.");
-			}
-					
-		}
+						
+		} scanner.close();
 	}
 }
 

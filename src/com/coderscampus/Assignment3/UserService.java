@@ -9,11 +9,6 @@ public class UserService {
 	
 		static User[] userArr = new User[4];
 		
-		public UserService() {
-			dataRead();
-		}
-		
-
 	public static void dataRead() {
 		
 		BufferedReader fileReader = null;

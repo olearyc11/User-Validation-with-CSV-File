@@ -7,20 +7,20 @@ public class UserLoginApplication {
 
 	public static void main(String[] args) {
 		
-		UserService.dataRead();
-		UserService.getUsers();
+		
 		Scanner scanner = new Scanner(System.in);
 		int attempts = 5;
-	
+		UserService userService = new UserService();
+		User loggedInUser = null;
 		while (attempts > 0) {
 			System.out.println("Enter your email:");
 			String usernameInput = scanner.nextLine();
 			System.out.println("Enter your password:");
 			String passwordInput = scanner.nextLine();
 			
-			if (UserService.validateInput(usernameInput, passwordInput)) {
-				String name = UserService.getNamebyUsername(usernameInput);
-				System.out.println("Welcome: " + name);
+			loggedInUser = userService.getNameByUsernameAndPassword(usernameInput, passwordInput);
+			if (loggedInUser != null) {
+				System.out.println("Welcome: " + loggedInUser.getName());
 				break;
 			} else { 
 				attempts--;
@@ -30,8 +30,7 @@ public class UserLoginApplication {
 				}
 				System.out.println("Invalid login, please try again.");
 				continue;
-			}
-						
+			}			
 		} scanner.close();
 	}
 }
